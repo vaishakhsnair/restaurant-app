@@ -8,6 +8,7 @@ import { useAuth } from "..//context/AuthContext";
 import { useCurrency } from "..//context/CurrencyContext";
 import DinoGame from "../components/Dinogame";
 import { HandPlatter, MinusIcon, PlusIcon, SearchIcon } from "lucide-react";
+import { GrRadialSelected } from "react-icons/gr";
 
 type MenuItemData = {
   name: string;
@@ -246,12 +247,15 @@ export default function Menu({ restaurantId }: { restaurantId: string }) {
       )}
 
       <div className=" backdrop-blur-sm rounded-xl shadow-md z-10 my-2 max-w-full ">
-        <div className="flex overflow-x-scroll py-2 rounded-xl px-4 no-scrollbar items-center justify-between">
+        <div className="flex gap-2 overflow-x-scroll
+        w-full
+         rounded-xl px-4 
+         items-center ">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`flex-shrink-0 px-6 py-2 mx-1 rounded-xl whitespace-nowrap ${
+              className={`min-w-20 p-2 rounded-xl whitespace-nowrap ${
                 activeCategory === category
                   ? "bg-white/50 text-white"
                   : "bg-white/20 text-white"
@@ -266,99 +270,165 @@ export default function Menu({ restaurantId }: { restaurantId: string }) {
       <div className="mt-4 space-y-4 mb-4 relative">
         {filteredCategories.map((category) =>
           category.items.map((item) => (
+            // <div
+            //   key={`${category._id}-${item.name}`}
+            //   className={`flex items-center bg-white/20 text-white p-4 rounded-lg shadow cursor-pointer hover:shadow-md relative transition-shadow ${!item.isAvailable ? "opacity-50" : ""}`}
+            //   onClick={() => handleItemClick(category._id, item.name)}
+            // >
+            //   <div className="relative w-24 h-24 mr-4 bg-gray-200 rounded-md">
+            //     {item.image && (
+            //       <Image
+            //         src={`data:image/jpeg;base64,${item.image}`}
+            //         alt={item.name}
+            //         layout="fill"
+            //         objectFit="fit"
+            //         className="rounded-xl"
+            //       />
+            //     )}
+            //     {!item.isAvailable && (
+            //       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-md">
+            //         <span className="text-white font-bold">Out of Stock</span>
+            //       </div>
+            //     )}
+            //   </div>
+            //   <div className="flex-grow">
+            //     <h3 className="font-bold text-lg">{item.name}</h3>
+            //     <p className="text-white  mt-1">
+            //       {currency}
+            //       {item.price}
+            //     </p>
+            //     {item.volume && (
+            //       <p className="text-gray-500 text-sm">{item.volume}</p>
+            //     )}
+            //   </div>
+            //   <div
+            //     className="flex items-center absolute right-[2%] bottom-4"
+            //     onClick={(e) => {
+            //       e.preventDefault();
+            //       e.stopPropagation();
+            //     }}
+            //   >
+            //     {item.isAvailable ? (
+            //       getItemQuantity(category._id, item.name) === 0 ? (
+            //         <button
+            //           onClick={(e) =>
+            //             handleQuantityUpdate(
+            //               e,
+            //               category._id,
+            //               item.name,
+            //               "increase",
+            //             )
+            //           }
+            //           className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors"
+            //         >
+            //           Add
+            //         </button>
+            //       ) : (
+            //         <div className="flex items-center">
+            //           <button
+            //             className="bg-white rounded-full p-1"
+            //             onClick={(e) =>
+            //               handleQuantityUpdate(
+            //                 e,
+            //                 category._id,
+            //                 item.name,
+            //                 "decrease",
+            //               )
+            //             }
+            //           >
+            //             <MinusIcon size={22} color="black" />
+            //           </button>
+            //           <span className="mx-2 w-8 text-center font-bold">
+            //             {getItemQuantity(category._id, item.name)}
+            //           </span>
+            //           <button
+            //             className="bg-white rounded-full p-1"
+            //             onClick={(e) =>
+            //               handleQuantityUpdate(
+            //                 e,
+            //                 category._id,
+            //                 item.name,
+            //                 "increase",
+            //               )
+            //             }
+            //           >
+            //             <PlusIcon size={22} color="black" />
+            //           </button>
+            //         </div>
+            //       )
+            //     ) : (
+            //       <span className="text-red-500 font-semibold">
+            //         Unavailable
+            //       </span>
+            //     )}
+            //   </div>
+            // </div>
             <div
-              key={`${category._id}-${item.name}`}
-              className={`flex items-center bg-white/20 text-white p-4 rounded-lg shadow cursor-pointer hover:shadow-md relative transition-shadow ${!item.isAvailable ? "opacity-50" : ""}`}
-              onClick={() => handleItemClick(category._id, item.name)}
+              className="w-full
+                 h-32 backdrop-blur-sm"
             >
-              <div className="relative w-24 h-24 mr-4 bg-gray-200 rounded-md">
-                {item.image && (
-                  <Image
-                    src={`data:image/jpeg;base64,${item.image}`}
-                    alt={item.name}
-                    layout="fill"
-                    objectFit="fit"
-                    className="rounded-xl"
-                  />
-                )}
-                {!item.isAvailable && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-md">
-                    <span className="text-white font-bold">Out of Stock</span>
-                  </div>
-                )}
-              </div>
-              <div className="flex-grow">
-                <h3 className="font-bold text-lg">{item.name}</h3>
-                <p className="text-white  mt-1">
-                  {currency}
-                  {item.price}
-                </p>
-                {item.volume && (
-                  <p className="text-gray-500 text-sm">{item.volume}</p>
-                )}
-              </div>
+            <div 
+              className="flex w-full
+                 h-[8.5rem] bg-white/20  backdrop-blur-sm
+                 rounded-3xl  overflow-hidden
+                  p-4 text-white productsans-regular"
+            >
               <div
-                className="flex items-center absolute right-[2%] bottom-4"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
+                className="flex flex-col"
               >
-                {item.isAvailable ? (
-                  getItemQuantity(category._id, item.name) === 0 ? (
-                    <button
-                      onClick={(e) =>
-                        handleQuantityUpdate(
-                          e,
-                          category._id,
-                          item.name,
-                          "increase",
-                        )
-                      }
-                      className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors"
-                    >
-                      Add
-                    </button>
-                  ) : (
-                    <div className="flex items-center">
-                      <button
-                        className="bg-white rounded-full p-1"
-                        onClick={(e) =>
-                          handleQuantityUpdate(
-                            e,
-                            category._id,
-                            item.name,
-                            "decrease",
-                          )
-                        }
-                      >
-                        <MinusIcon size={22} color="black" />
-                      </button>
-                      <span className="mx-2 w-8 text-center font-bold">
-                        {getItemQuantity(category._id, item.name)}
-                      </span>
-                      <button
-                        className="bg-white rounded-full p-1"
-                        onClick={(e) =>
-                          handleQuantityUpdate(
-                            e,
-                            category._id,
-                            item.name,
-                            "increase",
-                          )
-                        }
-                      >
-                        <PlusIcon size={22} color="black" />
-                      </button>
-                    </div>
-                  )
-                ) : (
-                  <span className="text-red-500 font-semibold">
-                    Unavailable
-                  </span>
-                )}
+                <p
+                  className="font-bold 
+                  flex w-fit items-center 
+                  justify-center gap-2 text-xl"
+                >
+                  <GrRadialSelected size={20} color="#7BDD97"/>
+                  {item.name}</p>
+                <p className="text-xl text-gray-200 poppins-regular">₹{item.price}</p>
+ 
+                <p className="text-base mt-3 text-gray-200 ">Availability : {item.volume}</p>
               </div>
+
+
+              <img 
+                className="absolute h-32  w-40 -mt-4 -right-4  -z-10 " 
+                src={`data:image/jpeg;base64,${item.image}`}  
+              />
+            
             </div>
+            <div className="
+                absolute bg-white/20 backdrop-blur-3xl
+                w-36 h-10 -bottom-2 right-0 rounded-br-xl
+                flex justify-evenly cursor-pointer items-center
+              ">
+(               <p
+                onClick={(e) =>
+                    handleQuantityUpdate(
+                      e,
+                      category._id,
+                      item.name,
+                      "decrease",
+                    )
+                  }
+                className="text-white text-4xl font-bold">-</p>
+               <p className="text-white text-2xl font-bold">{getItemQuantity(category._id, item.name)}</p>
+               <p
+                  onClick={(e) =>
+                  handleQuantityUpdate(
+                    e,
+                    category._id,
+                    item.name,
+                    "increase",
+                  )
+                }
+               className="text-white text-4xl font-bold">+</p>)
+               
+             </div>
+
+            </div>
+            
+
+
+
           )),
         )}
       </div>

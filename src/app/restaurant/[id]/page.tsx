@@ -147,8 +147,8 @@ function RestaurantContent() {
               src={bannerUrl}
               alt={restaurant.name}
               layout="fill"
-              objectFit="cover"
-              className="brightness-50 rounded-xl min-h-fit"
+              objectFit="fit"
+              className="brightness-50 rounded-xl min-h-fit "
               priority
             />
           )}
